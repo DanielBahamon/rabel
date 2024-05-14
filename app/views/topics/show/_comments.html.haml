@@ -1,0 +1,6 @@
+%section
+  .box
+    #comments{:class => "#{'fix_cell' if @total_pages == 1}"}
+      = render @comments
+    .center
+      = paginate @comments, :param_name => :p

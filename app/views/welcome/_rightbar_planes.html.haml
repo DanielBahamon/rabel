@@ -1,0 +1,7 @@
+.box.fix_cell
+  .header
+    讨论区
+  - Channel.order('created_at ASC').each do |ch|
+    .cell
+      = link_to ch.name, ch
+

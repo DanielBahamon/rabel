@@ -1,0 +1,15 @@
+.box
+  .cell
+    .fr
+      = admin_create_button('创建新页面', :page)
+    = build_admin_navigation([@title])
+  .inner
+    %table.table
+      %thead
+        %tr
+          %th{:align => :right, :width => 100} URL
+          %th{:align => :center, :width => :auto} 标题
+          %th{:align => :center, :width => :auto} 发布状态
+          %th{:align => :left} 操作
+      %tbody
+        = render @pages

@@ -1,0 +1,22 @@
+- content_for :sidebar_box do
+  .box
+    .cell
+      = user_profile_avatar_link(@topic.user, :large)
+  - if user_signed_in?
+    - if current_user.bookmarked?(@topic)
+      = link_to '取消收藏', current_user.bookmark_of(@topic), data: {turbo_method: :delete}, :class => 'btn btn-sm btn-outline-danger unbookmark'
+    - else
+      = link_to '加入收藏', topic_bookmarks_path(@topic), data: {turbo_method: :post}, :class => 'btn btn-sm btn-outline-info bookmark'
+
+.box
+  .inner.topic-title
+    = Rabel::Base.make_mention_links(Rabel::Base.h(@topic.title)).html_safe
+  .inner
+    .content.topic_content= format_topic(@topic.content)
+
+= render 'topics/show/comments' if @comments.any?
+
+- if @topic.comments_closed?
+  = render 'shared/box_tip', :tip => t('tips.comments_closed')
+
+= render 'topics/show/comment_form' unless @topic.comments_closed?
